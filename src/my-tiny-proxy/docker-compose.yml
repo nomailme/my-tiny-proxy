@@ -1,0 +1,15 @@
+# docker-compose.yml
+version: '2'
+
+services:
+  proxy:
+    image: my-tiny-proxy
+    ports:
+      - 5000:5000
+    environment:
+      - Destination=http://whoami
+    volumes:
+      - ./certificate.crt:/app/certificate.crt
+      - ./certificate.key:/app/certificate.key
+  whoami:
+    image: traefik/whoami:latest
